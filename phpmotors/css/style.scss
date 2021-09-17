@@ -1,0 +1,76 @@
+$light-gray: #bababa;
+$gray: #8d8d8d;
+$dark-gray: #3a3a3a;
+$light-blue: #a6cbeb;
+$blue: #4c96d7;
+$white: #ffffff;
+
+body {
+    font: 16px 'Share Tech Mono', monospace;
+    background-image: url('/phpmotors/images/site/small_check.jpg');
+    margin: 0;
+}
+
+h1 {
+    font-size: 1.5em; 
+}
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .my-account {
+        margin-right: 1em;
+    }
+}
+
+.site-nav {
+    color: $white;
+    background-color: $dark-gray;
+    margin: 0;
+    ul {
+        margin: 0;
+        padding: 1em 0.5em;
+        list-style-type: none;
+        li {
+            display: inline;
+            padding: 1em 0;
+            // margin-right: 0.3em;
+            cursor: pointer;
+            &.active {
+                background-color: $blue;
+                color: black;
+            }
+        }
+    }
+}
+
+.site-footer {
+    border-top: 4px solid $dark-gray;
+    text-align: center;
+    font-size: 0.8em;
+    padding-bottom: 1em;
+}
+
+.main-container {
+    background-color: white;
+    max-width: 1000px;
+    margin: auto;
+}
+
+@media only screen and (min-width: 1000px) {
+    .main-container {
+        border: 5px solid $blue;
+        border-radius: 5px;
+    }
+
+    .site-nav {
+        font-size: 1.2em;
+        ul {
+            li {
+                padding: 1em 0.2em;
+                margin-right: 0.3em;
+            }
+        }
+    }
+}
