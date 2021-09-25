@@ -12,6 +12,10 @@ h1 {
   font-size: 1.5em;
 }
 
+h2 {
+  font-size: 1.25em;
+}
+
 .site-header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -47,11 +51,13 @@ h1 {
 }
 
 .site-nav ul li.active {
-  background-color: #4c96d7;
+  background-color: #a6cbeb;
   color: black;
+  padding: 1em 0.2em;
 }
 
 .site-footer {
+  margin-top: 3em;
   border-top: 4px solid #3a3a3a;
   text-align: center;
   font-size: 0.8em;
@@ -64,9 +70,106 @@ h1 {
   margin: auto;
 }
 
+.above-the-fold {
+  color: #2d6596;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  -ms-grid-rows: auto auto auto;
+      grid-template-rows: auto auto auto;
+}
+
+.above-the-fold .feature-list {
+  grid-column: 1/-1;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+  z-index: 5;
+  margin-left: 0.2em;
+  font-weight: bold;
+}
+
+.above-the-fold .delorean-img {
+  grid-column: 1/-1;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  grid-row: 1/3;
+  margin: 0;
+  margin-top: 1em;
+}
+
+.above-the-fold .delorean-img img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  max-height: 100%;
+}
+
+.above-the-fold h2 {
+  margin: 0;
+}
+
+.above-the-fold ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.above-the-fold .btn.own-today {
+  grid-column: 1/-1;
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 1;
+  grid-row: 3/4;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  margin-top: 1em;
+}
+
+button {
+  background-color: #2d6596;
+  font: bold 1.5em Arial, sans-serif;
+  color: #bababa;
+  padding: 0.5em 1em;
+}
+
+.reviews li {
+  margin-bottom: 1em;
+}
+
+.upgrade-list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+
+.upgrade-list figure {
+  margin: 0;
+  text-align: center;
+}
+
+.upgrade-list .upgrade-container {
+  background-color: #2d6596;
+  height: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 2px solid #8d8d8d;
+}
+
+.upgrade-list .upgrade-container img {
+  -o-object-fit: none;
+     object-fit: none;
+}
+
 @media only screen and (min-width: 1000px) {
   .main-container {
-    border: 5px solid #4c96d7;
+    border: 5px solid #2d6596;
     border-radius: 5px;
   }
   .site-nav {
@@ -75,6 +178,49 @@ h1 {
   .site-nav ul li {
     padding: 1em 0.2em;
     margin-right: 0.3em;
+  }
+  .above-the-fold .feature-list {
+    margin-top: 1rem;
+    margin-left: 3rem;
+  }
+  .above-the-fold .delorean-img {
+    grid-column: 1/-1;
+    grid-row: 1/-1;
+    margin: 0;
+  }
+  .above-the-fold .btn.own-today {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1/2;
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 1;
+    grid-row: 2/3;
+    margin: 1em 0 0 3rem;
+    -ms-grid-column-align: start;
+        justify-self: start;
+  }
+  .below-the-fold {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    gap: 3em;
+  }
+  .below-the-fold .upgrades {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1/2;
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    grid-row: 1/2;
+  }
+  .below-the-fold .reviews {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
+    grid-column: 2/3;
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    grid-row: 1/2;
   }
 }
 /*# sourceMappingURL=style.css.map */

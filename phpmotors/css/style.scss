@@ -2,7 +2,7 @@ $light-gray: #bababa;
 $gray: #8d8d8d;
 $dark-gray: #3a3a3a;
 $light-blue: #a6cbeb;
-$blue: #4c96d7;
+$blue: #2d6596;
 $white: #ffffff;
 
 body {
@@ -17,6 +17,10 @@ main {
 
 h1 {
     font-size: 1.5em; 
+}
+
+h2 {
+    font-size: 1.25em;
 }
 
 .site-header {
@@ -42,14 +46,16 @@ h1 {
             // margin-right: 0.3em;
             cursor: pointer;
             &.active {
-                background-color: $blue;
+                background-color: $light-blue;
                 color: black;
+                padding: 1em 0.2em;
             }
         }
     }
 }
 
 .site-footer {
+    margin-top: 3em;
     border-top: 4px solid $dark-gray;
     text-align: center;
     font-size: 0.8em;
@@ -60,6 +66,78 @@ h1 {
     background-color: white;
     max-width: 1000px;
     margin: auto;
+}
+
+.above-the-fold {
+    color: $blue;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto;
+    .feature-list {
+        grid-column: 1/-1;
+        grid-row: 1/2;
+        z-index: 5;
+        margin-left: 0.2em;
+        font-weight: bold;
+    }
+    .delorean-img {
+        grid-column: 1/-1;
+        grid-row: 1/3;
+        margin: 0;
+        margin-top: 1em;
+        img {
+            object-fit: cover;
+            width: 100%;
+            max-height: 100%;
+        }
+    }
+    h2 {
+        margin: 0;
+    }
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+    .btn.own-today {
+        grid-column: 1/-1;
+        grid-row: 3/4;
+        justify-self: center;
+        margin-top: 1em;
+    }
+}
+
+button {
+    background-color: $blue;
+    font: bold 1.5em Arial, sans-serif;
+    color: $light-gray;
+    padding: 0.5em 1em;
+}
+
+.reviews {
+    li {
+        margin-bottom: 1em;
+    }
+}
+
+.upgrade-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    figure {
+        margin: 0;
+        text-align: center;
+    }
+    .upgrade-container {
+        background-color: $blue;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        border: 2px solid $gray;
+        img {
+            object-fit: none;
+        }
+    }
 }
 
 @media only screen and (min-width: 1000px) {
@@ -75,6 +153,38 @@ h1 {
                 padding: 1em 0.2em;
                 margin-right: 0.3em;
             }
+        }
+    }
+
+    .above-the-fold {
+        .feature-list {
+            margin-top: 1rem;
+            margin-left: 3rem;
+        }
+        .delorean-img {
+            grid-column: 1/-1;
+            grid-row: 1/-1;
+            margin: 0;
+        }
+        .btn.own-today {
+            grid-column: 1/2;
+            grid-row: 2/3;
+            margin: 1em 0 0 3rem;
+            justify-self: start;
+        }
+    }
+
+    .below-the-fold {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3em;
+        .upgrades {
+            grid-column: 1/2;
+            grid-row: 1/2;
+        }
+        .reviews{
+            grid-column: 2/3;
+            grid-row: 1/2;
         }
     }
 }

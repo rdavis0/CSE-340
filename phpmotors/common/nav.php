@@ -2,8 +2,8 @@
 
 <nav class='site-nav'>
     <ul id='nav-list'>
-        <li>Home</li>    
-        <li class='active'>Classic</li>
+        <li class='active'>Home</li>    
+        <li>Classic</li>
         <li>Sports</li>
         <li>SUV</li>
         <li>Trucks</li>
