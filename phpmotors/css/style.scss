@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'Share Tech Mono';
+    src: url('../fonts/Share_Tech_Mono/sharetechmono-regular-webfont.woff2') format('woff2'),
+         url('../fonts/Share_Tech_Mono/sharetechmono-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 $light-gray: #bababa;
 $gray: #8d8d8d;
 $dark-gray: #3a3a3a;
@@ -42,8 +50,7 @@ h2 {
         list-style-type: none;
         li {
             display: inline;
-            padding: 1em 0;
-            // margin-right: 0.3em;
+            padding: 1em 0em;
             cursor: pointer;
             &.active {
                 background-color: $light-blue;
@@ -169,7 +176,7 @@ button {
         .btn.own-today {
             grid-column: 1/2;
             grid-row: 2/3;
-            margin: 1em 0 0 3rem;
+            margin: 1em 0em 0em 3rem;
             justify-self: start;
         }
     }
