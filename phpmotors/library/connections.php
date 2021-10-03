@@ -13,7 +13,6 @@ function phpmotorsConnect() {
 
     try{
         $link = new PDO($dsn, $username, $password, $options);
-        echo('It\'s working!');
         return $link;
     } catch(PDOException $e){
         header('Location: /phpmotors/500.php');
