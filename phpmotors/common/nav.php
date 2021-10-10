@@ -1,5 +1,3 @@
-
-
 <nav class='site-nav'>
     <ul id='nav-list'>
         <li class='active'>Home</li>    

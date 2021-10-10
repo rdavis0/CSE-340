@@ -10,8 +10,7 @@
 
 <body>
     <div class='main-container'>
-        <?php require_once './common/header.php'; ?>
-        <?php require_once './common/nav.php'; ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'].'/phpmotors/common/header.php'; ?>
         <main>
             <h1>Welcome to PHP Motors!</h1>
             <section class='above-the-fold'>
@@ -78,6 +77,6 @@
                 </section>
             </div>
         </main>
-        <?php require_once './common/footer.php'; ?>
+        <?php require_once $_SERVER['DOCUMENT_ROOT'].'/phpmotors/common/footer.php'; ?>
     </div>
 </body>

@@ -23,6 +23,10 @@ h2 {
   font-size: 1.25em;
 }
 
+label {
+  font-weight: bold;
+}
+
 .site-header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -39,10 +43,20 @@ h2 {
   margin-right: 1em;
 }
 
+.site-header .my-account a {
+  text-decoration: none;
+  color: black;
+}
+
 .site-nav {
-  color: #ffffff;
   background-color: #3a3a3a;
   margin: 0;
+  font-size: 0.8rem;
+}
+
+.site-nav a {
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .site-nav ul {
@@ -53,7 +67,7 @@ h2 {
 
 .site-nav ul li {
   display: inline;
-  padding: 1em 0em;
+  padding: 1rem 0.5rem;
   cursor: pointer;
 }
 
@@ -131,13 +145,15 @@ h2 {
   -ms-grid-column-align: center;
       justify-self: center;
   margin-top: 1em;
-}
-
-button {
-  background-color: #2d6596;
-  font: bold 1.5em Arial, sans-serif;
   color: #bababa;
   padding: 0.5em 1em;
+  font-size: 1.5em;
+}
+
+button, .btn {
+  background-color: #2d6596;
+  font: bold 1.2em Arial, sans-serif;
+  padding: 0.2em 0.5em;
 }
 
 .reviews li {
@@ -172,6 +188,14 @@ button {
 .upgrade-list .upgrade-container img {
   -o-object-fit: none;
      object-fit: none;
+}
+
+.sign-in-form input, .register-form input {
+  height: 1.5em;
+}
+
+.sign-in-form .btn, .register-form .btn {
+  margin-top: 1em;
 }
 
 @media only screen and (min-width: 1000px) {
