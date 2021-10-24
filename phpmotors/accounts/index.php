@@ -4,6 +4,7 @@
  */
 require_once '../library/connections.php';
 require_once '../model/main-model.php';
+require_once '../model/accounts-model.php';
 
 $classifications = getClassifications();
 // var_dump($classifications);
@@ -29,10 +30,35 @@ switch ($action){
     case 'login':
         include "../view/login.php";
         break;
-    case 'register':
+    case 'registration':
         include "../view/register.php";
+        break;
+    case 'register':
+        $clientFirstname = filter_input(INPUT_POST, 'clientFirstname');
+        $clientLastname = filter_input(INPUT_POST, 'clientLastname');
+        $clientEmail = filter_input(INPUT_POST, 'clientEmail');
+        $clientPassword = filter_input(INPUT_POST, 'clientPassword');
+        
+        // Check for missing data
+        if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($clientPassword)){
+            $message = '<p class="error">Please fill in empty fields</p>';
+            include '../view/register.php';
+            exit; 
+        }
+
+        // Register client and check result of operation
+        $regResult = regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassword);
+        
+        if($regResult === 1){
+            $message = "<p>Thanks for registering, $clientFirstname. Please use your email and password to log in.</p>";
+            include '../view/login.php';
+            exit;
+        } else {
+            $message = "<p class='error'>Whoops! The registration failed. Please try again.</p>";
+            include '../view/register.php';
+            exit;
+        }
         break;
     default:
         break;
 }
-?>

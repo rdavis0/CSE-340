@@ -27,6 +27,11 @@ label {
   font-weight: bold;
 }
 
+.error {
+  color: red;
+  font-weight: bold;
+}
+
 .site-header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -190,12 +195,30 @@ button, .btn {
      object-fit: none;
 }
 
-.sign-in-form input, .register-form input {
-  height: 1.5em;
+form textarea, form select, form input {
+  height: 1.5rem;
+  width: 12rem;
+  margin-bottom: 1em;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
 }
 
-.sign-in-form .btn, .register-form .btn {
-  margin-top: 1em;
+form textarea {
+  height: 5rem;
+}
+
+form.register-form #pw {
+  margin-bottom: 0;
+}
+
+select {
+  font-family: 'Share Tech Mono';
+  font-weight: normal;
+  font-style: normal;
+}
+
+.pw-req {
+  margin-top: 0;
 }
 
 @media only screen and (min-width: 1000px) {

@@ -35,6 +35,11 @@ label {
     font-weight: bold;
 }
 
+.error {
+    color: red;
+    font-weight: bold;
+}
+
 .site-header {
     display: flex;
     justify-content: space-between;
@@ -161,13 +166,32 @@ button, .btn {
     }
 }
 
-.sign-in-form, .register-form {
-    input {
-        height: 1.5em;
+form {
+    textarea, select, input {
+        height: 1.5rem;
+        width: 12rem;
+        margin-bottom: 1em;
+        box-sizing: content-box;
     }
-    .btn {
-        margin-top: 1em;
+    textarea {
+        height: 5rem;
     }
+    &.register-form {
+        #pw {
+            margin-bottom: 0;
+        }
+    }
+}
+
+select {
+    //TODO: reset select (and all html) default styles instead of defining the font again here
+    font-family: 'Share Tech Mono';
+    font-weight: normal;
+    font-style: normal;
+}
+
+.pw-req {
+    margin-top: 0;
 }
 
 @media only screen and (min-width: 1000px) {
