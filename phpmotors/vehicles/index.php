@@ -5,34 +5,20 @@
 require_once '../library/connections.php';
 require_once '../model/main-model.php';
 require_once '../model/vehicles-model.php';
+require_once '../library/functions.php';
 
-$classifications = getClassifications();
 // var_dump($classifications);
 //     exit;
 
-// Build a navigations bar using the $classifications array
-$navList = '<ul>';
-$navList .= "<li><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></li>";
-foreach ($classifications as $classification) {
-    $navList .= "<li><a href='/phpmotors/index.php?action=".urlencode($classification['classificationName'])
-    ."' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></li>";
-}
-$navList .= '</ul>';
-// echo $navList;
-// exit;
+// Build navigation bar
+$navList = buildNavList();
 
-// Build classification list 
-$classificationList = "<label>Classification<br>
-    <select id='classifications' name='classifications'>";
-foreach ($classifications as $classification) {
-    $classificationList .= "<option value=$classification[classificationId]>$classification[classificationName]</option>";
-}
-$classificationList .= "</select>";
+// Get classif array
+$classifications = getClassifications();
 
-
-$action = filter_input(INPUT_POST, 'action');
+$action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
     if ($action == NULL){
-        $action = filter_input(INPUT_GET, 'action');
+        $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
     }
 
 switch ($action) {
@@ -43,13 +29,13 @@ switch ($action) {
         include "../view/add-classification.php";
         break;
     case 'addVehicle':
-        $classificationId = filter_input(INPUT_POST, 'classifications');
-        $invMake = filter_input(INPUT_POST, 'invMake');
-        $invModel = filter_input(INPUT_POST, 'invModel');
-        $invDesc = filter_input(INPUT_POST, 'invDesc');
-        $invPrice = filter_input(INPUT_POST, 'invPrice');
-        $invStock = filter_input(INPUT_POST, 'invStock');
-        $invColor = filter_input(INPUT_POST, 'invColor');
+        $classificationId = filter_input(INPUT_POST, 'classifications', FILTER_SANITIZE_STRING);
+        $invMake = trim(filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_STRING));
+        $invModel = trim(filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_STRING));
+        $invDesc = trim(filter_input(INPUT_POST, 'invDesc', FILTER_SANITIZE_STRING));
+        $invPrice = filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $invStock = filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT);
+        $invColor = trim(filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING));
         $invImage = "/images/no-image.png";
         $invThumb = "/images/no-image.png";
         
@@ -77,7 +63,7 @@ switch ($action) {
         }    
         break;
     case 'addClassification':
-        $classificationName = filter_input(INPUT_POST, 'classificationName');
+        $classificationName = trim(filter_input(INPUT_POST, 'classificationName', FILTER_SANITIZE_STRING));
         
         // Check for missing data
         if(empty($classificationName)) {
@@ -90,6 +76,7 @@ switch ($action) {
         $result = addClassification($classificationName);
         
         if($result === 1){
+            $message = null;
             header('Location: /phpmotors/vehicles/index.php');
             exit;
         } else {

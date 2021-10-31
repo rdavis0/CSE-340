@@ -1,4 +1,18 @@
-<!DOCTYPE html>
+<?php 
+    // Build classification list 
+    $classificationList = "<label>Classification<br>
+        <select id='classifications' name='classifications'>";
+    foreach ($classifications as $classification) {
+        $classificationList .= "<option value='$classification[classificationId]'";
+        if(isset($classificationId)){
+            if($classification['classificationId'] === $classificationId) {
+                $classificationList .= ' selected ';
+            }
+        }
+        $classificationList .= ">$classification[classificationName]</option>";
+    }
+    $classificationList .= "</select>";
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -22,17 +36,28 @@
             <form class='add-vehicle-form' method="post" action="/phpmotors/vehicles/index.php">
                 <?php echo $classificationList; ?></label><br>
                 <label>Make<br>
-                    <input type="text" name="invMake" id="make"></label><br>
+                    <input type="text" name="invMake" id="make" required
+                    <?php if(isset($invMake)){echo "value='$invMake'";}  ?>>
+                </label><br>
                 <label>Model<br>
-                    <input type="text" name="invModel" id="model"></label><br>
+                    <input type="text" name="invModel" id="model" required
+                    <?php if(isset($invModel)){echo "value='$invModel'";}  ?>>
+                </label><br>
                 <label>Description<br>
-                    <textarea name="invDesc" id="desc"></textarea></label><br>
+                    <textarea required name="invDesc" id="desc"><?php if(isset($invDesc)) echo $invDesc; ?></textarea>
+                </label><br>
                 <label>Price<br>
-                    <input type='number' name="invPrice" id="price"></label><br>
+                    <input type='number' name="invPrice" id="price" required
+                    <?php if(isset($invPrice)){echo "value='$invPrice'";}  ?>>
+                </label><br>
                 <label>Stock<br>
-                    <input type='number' name="invStock" id="stock"></label><br>
+                    <input type='number' name="invStock" id="stock" required
+                    <?php if(isset($invStock)){echo "value='$invStock'";}  ?>>
+                </label><br>
                 <label>Color<br>
-                    <input type='text' name="invColor" id="color"></label><br>
+                    <input type='text' name="invColor" id="color" required
+                    <?php if(isset($invColor)){echo "value='$invColor'";}  ?>>
+                </label><br>
                 <input type="submit" class='btn' value="Add">
                 <!-- Add the action name - value pair -->
                 <input type="hidden" name="action" value="addVehicle">

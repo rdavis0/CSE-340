@@ -19,8 +19,8 @@
                 }
             ?>
             <form class='add-classification-form' method="post" action="/phpmotors/vehicles/index.php">
-                <label>Classification Name<br>
-                    <input type="text" name="classificationName" id="classificationName"></label><br>
+                <label>Classification Name (max 30 characters)<br>
+                    <input type="text" name="classificationName" id="classificationName" required maxlength="30"></label><br>
                 <input type="submit" class='btn add-btn' value="Add">
                 <!-- Add the action name - value pair -->
                 <input type="hidden" name="action" value="addClassification">

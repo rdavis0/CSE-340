@@ -21,13 +21,21 @@
             ?>
             <form class='register-form' method="post" action="/phpmotors/accounts/index.php">
                 <label>First Name <br>
-                    <input type="text" name="clientFirstname" id="fname"></label><br>
+                    <input type="text" name="clientFirstname" id="fname" required
+                        <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";}  ?>>
+                </label><br>
                 <label>Last Name <br>
-                    <input type="text" name="clientLastname" id="lname"></label><br>
+                    <input type="text" name="clientLastname" id="lname" required
+                    <?php if(isset($clientLastname)){echo "value='$clientLastname'";}  ?>>
+                </label><br>
                 <label>Email <br>
-                    <input type='email' name="clientEmail" id="email"></label><br>
+                    <input type='email' name="clientEmail" id="email" required
+                    <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?>>
+                </label><br>
                 <label>Password <br>
-                    <input type='password' name="clientPassword" id="pw"></label><br>
+                    <input type='password' name="clientPassword" id="pw" required
+                        pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
+                </label><br>
                 <p class='pw-req'>Passwords must be at least 8 characters and contain at least 1 number, 1 capital letter, and 1 special character</p>
                 <input type="submit" class='btn register-btn' value="Register">
                 <!-- Add the action name - value pair -->

@@ -19,9 +19,15 @@
                 }
             ?>
             <form class='sign-in-form'>
-                <label>Email <br><input type='email'></label><br>
-                <label>Password <br><input type='password'></label><br>
+                <label>Email <br><input type='email' required
+                    <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?>>
+                </label><br>
+                <label>Password <br><input type='password' id="pw" required
+                    pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
+                </label><br>
+                <p class='pw-req'>Passwords must be at least 8 characters and contain at least 1 number, 1 capital letter, and 1 special character</p>
                 <input type="submit" class='btn sign-in-btn' value="Sign in">
+                <input type="hidden" name="action" value="doLogin">
             </form>
             <p><a href="/phpmotors/accounts/index.php?action=registration">Not a member yet?</a></p>
         </main>

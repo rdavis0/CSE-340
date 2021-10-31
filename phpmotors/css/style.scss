@@ -12,6 +12,7 @@ $dark-gray: #3a3a3a;
 $light-blue: #a6cbeb;
 $blue: #2d6596;
 $white: #ffffff;
+$error-red: #E00000;
 
 body {
     font: 16px 'Share Tech Mono', monospace;
@@ -36,7 +37,7 @@ label {
 }
 
 .error {
-    color: red;
+    color: $error-red;
     font-weight: bold;
 }
 
@@ -63,11 +64,16 @@ label {
     }
     ul {
         margin: 0;
-        padding: 1em 0.5em;
+        padding: 1rem 0.5rem 0;
         list-style-type: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        column-gap: 1rem;
+        // grid-template-columns: repeat(auto-fill, minmax(max-content, 1fr));
         li {
             display: inline;
-            padding: 1rem 0.5rem;
+            padding-bottom: 1rem;
             cursor: pointer;
             &.active {
                 background-color: $light-blue;
@@ -176,7 +182,7 @@ form {
     textarea {
         height: 5rem;
     }
-    &.register-form {
+    &.register-form, &.sign-in-form {
         #pw {
             margin-bottom: 0;
         }
@@ -203,10 +209,8 @@ select {
     .site-nav {
         font-size: 1.2em;
         ul {
-            li {
-                padding: 1em 0.2em;
-                margin-right: 0.3em;
-            }
+            padding-left: 1rem;
+            column-gap: 2rem;
         }
     }
 
