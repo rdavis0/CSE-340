@@ -45,8 +45,9 @@ label {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    column-gap: 1.5rem;
     .my-account {
-        margin-right: 1em;
+        margin-right: 1rem;
         a{
             text-decoration: none;
             color: black;

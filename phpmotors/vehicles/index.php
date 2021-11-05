@@ -2,6 +2,10 @@
 /**
  * This is the Vehicles Controller
  */
+
+ // Create or access session
+ session_start();
+
 require_once '../library/connections.php';
 require_once '../model/main-model.php';
 require_once '../model/vehicles-model.php';

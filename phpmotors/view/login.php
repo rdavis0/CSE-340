@@ -14,15 +14,18 @@
         <main>
             <h1>Sign in</h1>
             <?php 
+                if (isset($_SESSION['message'])) {
+                    echo $_SESSION['message'];
+                }
                 if (isset($message)) {
                     echo $message;
                 }
             ?>
-            <form class='sign-in-form'>
-                <label>Email <br><input type='email' required
+            <form method="post" action="/phpmotors/accounts/" class='sign-in-form'>
+                <label>Email <br><input name='clientEmail' type='email' required
                     <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?>>
                 </label><br>
-                <label>Password <br><input type='password' id="pw" required
+                <label>Password <br><input name='clientPassword' type='password' id="pw" required
                     pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
                 </label><br>
                 <p class='pw-req'>Passwords must be at least 8 characters and contain at least 1 number, 1 capital letter, and 1 special character</p>
