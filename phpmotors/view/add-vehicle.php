@@ -1,4 +1,9 @@
 <?php 
+    // Check rights
+    if(!$_SESSION['loggedin'] || $_SESSION['clientData']['clientLevel'] <= 1) {
+        header('Location: /phpmotors');
+    }
+
     // Build classification list 
     $classificationList = "<label>Classification<br>
         <select id='classifications' name='classifications'>";

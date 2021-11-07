@@ -22,10 +22,6 @@ $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
         $action = filter_input(INPUT_GET, 'action');
     }
 
-if(isset($_COOKIE['firstname'])) {
-    $cookieFirstname = filter_input(INPUT_COOKIE, 'firstname', FILTER_SANITIZE_STRING);
-}
-
 switch ($action){
     case 'something':
         break;

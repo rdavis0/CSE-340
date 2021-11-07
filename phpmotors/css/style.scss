@@ -45,9 +45,9 @@ label {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    column-gap: 1.5rem;
-    .my-account {
-        margin-right: 1rem;
+    column-gap: 0.5rem;
+    .header-right {
+        margin-right: 0.5rem;
         a{
             text-decoration: none;
             color: black;
@@ -71,7 +71,6 @@ label {
         flex-wrap: wrap;
         justify-content: flex-start;
         column-gap: 1rem;
-        // grid-template-columns: repeat(auto-fill, minmax(max-content, 1fr));
         li {
             display: inline;
             padding-bottom: 1rem;

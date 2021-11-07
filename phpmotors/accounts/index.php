@@ -76,8 +76,6 @@ switch ($action) {
     case 'doLogin':
         $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
         $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
-        var_dump($clientEmail);
-        var_dump($clientPassword);
 
         $clientEmail = checkEmail($clientEmail);
         $isValidPassword = checkPassword($clientPassword);
@@ -112,7 +110,11 @@ switch ($action) {
         // Send them to the admin view
         include '../view/admin.php';
         exit;
-        break;
+    case 'logout':
+        unset($_SESSION['loggedin']);
+        session_destroy();
+        header('Location: /phpmotors');
     default:
+        include '../view/admin.php';
         break;
 }
