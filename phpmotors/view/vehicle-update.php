@@ -89,3 +89,4 @@ $classificationList .= "</select>";
         <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php'; ?>
     </div>
 </body>
+</html>

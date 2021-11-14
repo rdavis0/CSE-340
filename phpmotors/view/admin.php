@@ -19,15 +19,25 @@
     <div class='main-container'>
         <?php require_once $_SERVER['DOCUMENT_ROOT'].'/phpmotors/common/header.php'; ?>
         <main>
+            <?php if(isset($_SESSION['message'])) {
+                    echo $_SESSION['message'];
+            }?>
             <h1><?php echo $clientFirstname . " " . $clientLastname; ?></h1>
+            <p>You are logged in.</p>
             <?php
             echo "<ul>
                     <li>First name: {$clientFirstname}</li>
                     <li>Last name: {$clientLastname}</li>
                     <li>Email: {$clientEmail}</li>
                 </ul>";
+            ?>
+            <h2>Account Management</h2>
+            <p>Click below to update your account information or password</p>
+            <p><a href='/phpmotors/accounts/index.php?action=updateView'>Update Account Information</a></p>
+            <?php
                 if($clientData['clientLevel'] > 1) {
-                    echo "<p>Click below to manage vehicle inventory</p>
+                    echo "<h2>Inventory Management</h2>
+                    <p>Click below to manage vehicle inventory</p>
                     <p><a href='/phpmotors/vehicles'>Vehicle Management</a></p>";
                 }
             ?>
@@ -35,3 +45,4 @@
         <?php require_once $_SERVER['DOCUMENT_ROOT'].'/phpmotors/common/footer.php'; ?>
     </div>
 </body>
+</html>

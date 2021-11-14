@@ -182,7 +182,7 @@ form {
     textarea {
         height: 5rem;
     }
-    &.register-form, &.sign-in-form {
+    &.register-form, &.sign-in-form, &.account-update-form {
         #pw {
             margin-bottom: 0;
         }

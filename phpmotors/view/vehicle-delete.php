@@ -53,3 +53,4 @@ if (!$_SESSION['loggedin'] || $_SESSION['clientData']['clientLevel'] <= 1) {
         <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php'; ?>
     </div>
 </body>
+</html>

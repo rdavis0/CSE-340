@@ -34,9 +34,9 @@ switch ($action) {
     case 'register':
         $clientFirstname = trim(filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING));
         $clientLastname = trim(filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING));
-        $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_STRING));
+        $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
         // I opted not to trim password as the user may want spaces at the beginning or end of their pw
-        $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_EMAIL);
+        $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
 
         $clientEmail = checkEmail($clientEmail);
         $isValidPassword = checkPassword($clientPassword);
@@ -114,6 +114,79 @@ switch ($action) {
         unset($_SESSION['loggedin']);
         session_destroy();
         header('Location: /phpmotors');
+        exit;
+    case 'updateView':
+        include '../view/client-update.php';
+        exit;
+    case 'update':
+        $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+        $clientFirstname = trim(filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING));
+        $clientLastname = trim(filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING));
+        $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_STRING));
+        
+        // Check if email was changed
+        if($clientEmail != $_SESSION['clientData']['clientEmail']) {
+            // Check email validity
+            $clientEmail = checkEmail($clientEmail);
+
+            // Check for existing email
+            $emailExists = checkExistingEmail($clientEmail);
+            if ($emailExists) {
+                $message = "<p class='error'>An account with that email already exists. Please use a different email.</p>";
+                include '../view/client-update.php';
+                exit;
+            }
+        }
+
+        // Check for missing data
+        if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail)) {
+            $message = '<p class="error">Please fill in empty fields</p>';
+            include '../view/client-update.php';
+            exit;
+        }  
+        
+        $updateResult = updateClient($clientId, $clientFirstname, $clientLastname, $clientEmail);
+
+        if ($updateResult === 1) {
+            $_SESSION['message'] = "<p>The update was successful.</p>";
+            $_SESSION['clientData'] = getClientById($clientId);
+            header('Location: /phpmotors/accounts');
+            exit;
+        } else {
+            $_SESSION['message'] = "<p class='error'>There was an error with the update. No values were changed. Please try again.</p>";
+            header('Location: /phpmotors/accounts');
+            exit;
+        }
+        exit;
+    case 'updatePwd':
+        $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+        $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
+        
+        $isValidPassword = checkPassword($clientPassword);
+
+        // Check for errors
+        if (!$isValidPassword) {
+            $message = '<p class="error">The password was invalid. Please check the password requirements and try again.</p>';
+            include '../view/client-update.php';
+            exit;
+        }  
+        
+        // Hash the checked password
+        $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+        
+        $updateResult = updateClientPw($clientId, $hashedPassword);
+
+        if ($updateResult === 1) {
+            $_SESSION['message'] = "<p>Password update was successful.</p>";
+            $_SESSION['clientData'] = getClientById($clientId);
+            header('Location: /phpmotors/accounts');
+            exit;
+        } else {
+            $_SESSION['message'] = "<p class='error'>There was an error with the update. Password was not changed. Please try again.</p>";
+            header('Location: /phpmotors/accounts');
+            exit;
+        }
+        exit;
     default:
         include '../view/admin.php';
         break;
