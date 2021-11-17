@@ -1,7 +1,6 @@
 @font-face {
     font-family: 'Share Tech Mono';
-    src: url('../fonts/Share_Tech_Mono/sharetechmono-regular-webfont.woff2') format('woff2'),
-         url('../fonts/Share_Tech_Mono/sharetechmono-regular-webfont.woff') format('woff');
+    src: url('../fonts/Share_Tech_Mono/sharetechmono-regular-webfont.woff2') format('woff2'), url('../fonts/Share_Tech_Mono/sharetechmono-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -13,6 +12,15 @@ $light-blue: #a6cbeb;
 $blue: #2d6596;
 $white: #ffffff;
 $error-red: #E00000;
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
 
 body {
     font: 16px 'Share Tech Mono', monospace;
@@ -25,7 +33,7 @@ main {
 }
 
 h1 {
-    font-size: 1.5em; 
+    font-size: 1.5em;
 }
 
 h2 {
@@ -48,7 +56,7 @@ label {
     column-gap: 0.5rem;
     .header-right {
         margin-right: 0.5rem;
-        a{
+        a {
             text-decoration: none;
             color: black;
         }
@@ -140,7 +148,8 @@ label {
     }
 }
 
-button, .btn {
+button,
+.btn {
     background-color: $blue;
     font: bold 1.2em Arial, sans-serif;
     padding: 0.2em 0.5em
@@ -173,7 +182,9 @@ button, .btn {
 }
 
 form {
-    textarea, select, input {
+    textarea,
+    select,
+    input {
         height: 1.5rem;
         width: 12rem;
         margin-bottom: 1em;
@@ -182,7 +193,9 @@ form {
     textarea {
         height: 5rem;
     }
-    &.register-form, &.sign-in-form, &.account-update-form {
+    &.register-form,
+    &.sign-in-form,
+    &.account-update-form {
         #pw {
             margin-bottom: 0;
         }
@@ -200,12 +213,37 @@ select {
     margin-top: 0;
 }
 
+#inv-display {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    li {
+        margin-bottom: 3em;
+        border: 1px #ccc solid;
+        list-style-type: none;
+        flex: 1 1 auto;
+        text-align: center;
+        img {
+            max-width: 100%;
+        }
+        .veh-img-container {
+            margin-bottom: 10px;
+        }
+    }
+    h2 {
+        margin: 0;
+        padding-top: 10px;
+        border-top: 2px solid black;
+    }
+}
+
+// Desktop media query styles
 @media only screen and (min-width: 1000px) {
     .main-container {
         border: 5px solid $blue;
         border-radius: 5px;
     }
-
     .site-nav {
         font-size: 1.2em;
         ul {
@@ -213,7 +251,6 @@ select {
             column-gap: 2rem;
         }
     }
-
     .above-the-fold {
         .feature-list {
             margin-top: 1rem;
@@ -231,7 +268,6 @@ select {
             justify-self: start;
         }
     }
-
     .below-the-fold {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -240,9 +276,27 @@ select {
             grid-column: 1/2;
             grid-row: 1/2;
         }
-        .reviews{
+        .reviews {
             grid-column: 2/3;
             grid-row: 1/2;
         }
     }
+
+    /* For vehicle display in classification view */
+	#inv-display {
+		flex-flow: row wrap;
+		justify-content: flex-start;
+        h2 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            max-width: 200px;
+            height: 250px;
+            display: initial;
+        }
+        .veh-img-container {
+            height: 150px;
+        }
+	}
 }
