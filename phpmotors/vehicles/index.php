@@ -106,7 +106,7 @@ switch ($action) {
         break;
     case 'mod':
         $invId = filter_input(INPUT_GET, 'invId', FILTER_VALIDATE_INT);
-        $invInfo = getInvItemInfo($invId);
+        $invInfo = getVehicleById($invId);
         if (count($invInfo) < 1) {
             $message = 'Sorry, no vehicle information could be found.';
         }
@@ -150,7 +150,7 @@ switch ($action) {
         break;
     case 'del':
         $invId = filter_input(INPUT_GET, 'invId', FILTER_VALIDATE_INT);
-        $invInfo = getInvItemInfo($invId);
+        $invInfo = getVehicleById($invId);
         if (count($invInfo) < 1) {
             $message = 'Sorry, no vehicle information could be found.';
         }
@@ -185,6 +185,16 @@ switch ($action) {
         } else {
             $vehicleDisplay = buildVehiclesDisplay($vehicles);
             include '../view/classification.php';
+        }
+        break;
+    case 'vehicleDetailView':
+        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+        $vehicle = getVehicleById($invId);
+        if (!$vehicle) // Is this right syntax?
+            $message = "<p class='error'>Sorry, $vehicle[invMake] $vehicle[invModel] wasn't found.";
+        else {
+            $vehicleDetailsDisplay = buildVehicleDetailsDisplay($vehicle);
+            include '../view/vehicle-detail.php';
         }
         break;
     default:

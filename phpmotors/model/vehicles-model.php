@@ -72,7 +72,7 @@ function getInventoryByClassification($classificationId)
 }
 
 // Get vehicle information by invId
-function getInvItemInfo($invId)
+function getVehicleById($invId)
 {
     $db = phpmotorsConnect();
     $sql = 'SELECT * FROM inventory WHERE invId = :invId';
