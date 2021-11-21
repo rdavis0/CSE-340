@@ -23,7 +23,7 @@
                     </ul>
                 </div>
                 <figure class='delorean-img'>
-                    <img src="/phpmotors/images/delorean.jpg" alt="delorean">
+                    <img src="/phpmotors/images/vehicles/delorean.jpg" alt="delorean">
                 </figure>
                 <button class='btn own-today'>Own Today</button>
             </section>

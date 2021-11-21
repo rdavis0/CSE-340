@@ -188,11 +188,12 @@ switch ($action) {
         }
         break;
     case 'vehicleDetailView':
-        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+        $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_NUMBER_INT);
         $vehicle = getVehicleById($invId);
-        if (!$vehicle) // Is this right syntax?
-            $message = "<p class='error'>Sorry, $vehicle[invMake] $vehicle[invModel] wasn't found.";
-        else {
+        if (!$vehicle) {
+            $message = "<p class='error'>Sorry, the vehicle wasn't found.";
+            include '../view/vehicle-detail.php';
+        } else {
             $vehicleDetailsDisplay = buildVehicleDetailsDisplay($vehicle);
             include '../view/vehicle-detail.php';
         }
