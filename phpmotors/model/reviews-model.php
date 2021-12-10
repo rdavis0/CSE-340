@@ -22,11 +22,16 @@ function saveReview($clientId, $invId, $reviewText) {
 // Get reviews by inventory id
 function getReviewsByInvId($invId) {
     $db = phpmotorsConnect();
-    $sql = 'SELECT * FROM reviews WHERE invId = :invId';
+    $sql = 'SELECT reviews.reviewText, reviews.reviewDate, 
+                CONCAT(SUBSTRING(clients.clientFirstname, 1, 1), clients.clientLastname) AS screenName 
+            FROM reviews  
+            INNER JOIN clients ON reviews.clientId = clients.clientId
+            WHERE invId = :invId
+            ORDER BY reviews.reviewDate DESC;';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
     $stmt->execute();
-    $reviews = $stmt->fetch(PDO::FETCH_ASSOC);
+    $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     return $reviews;
 }

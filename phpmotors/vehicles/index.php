@@ -10,6 +10,7 @@ session_start();
 require_once '../library/connections.php';
 require_once '../model/main-model.php';
 require_once '../model/vehicles-model.php';
+require_once '../model/reviews-model.php';
 require_once '../library/functions.php';
 
 // var_dump($classifications);
@@ -194,7 +195,23 @@ switch ($action) {
             $message = "<p class='error'>Sorry, the vehicle wasn't found.";
             include '../view/vehicle-detail.php';
         } else {
+            $vehicleName = "$vehicle[invMake] $vehicle[invModel]"; 
+            $invId = "$vehicle[invId]";
+
+            // Build vehicle details
             $vehicleDetailsDisplay = buildVehicleDetailsDisplay($vehicle);
+
+            // If logged in, show review form
+            if(isLoggedIn()) {
+                $reviewForm = buildReviewForm($invId, $_SESSION['clientData']);
+            } else { // show login link
+                $reviewsMessage = "<p>Please <a href='/phpmotors/accounts/index.php?action=login'>sign in</a> to leave a review.</p>";    
+            }
+
+            $reviews = getReviewsByInvId($invId);
+            if(count($reviews)) {
+                $reviewsDisplay = buildReviewsDisplay($reviews);
+            }
             include '../view/vehicle-detail.php';
         }
         break;

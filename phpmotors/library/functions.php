@@ -88,4 +88,14 @@
         $form .= "</form>";
         return $form;
     }
+
+    function buildReviewsDisplay($reviews) {
+        $dv = "<div class='reviews-display'>";
+        foreach ($reviews as $review) {
+            $dv .= "<p class='review-metadata'><span class='screenName'>$review[screenName]</span> wrote on $review[reviewDate]</p>";
+            $dv .= "<p class='review-text'>$review[reviewText]</p>";
+        }
+        $dv .= "</div>";
+        return $dv;
+    }
 ?>
