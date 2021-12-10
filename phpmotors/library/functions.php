@@ -12,6 +12,13 @@
         return preg_match($pattern, $clientPassword);
     }
 
+    function isLoggedIn() {
+        if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] )
+            return true;
+        else
+            return false;
+    }
+
     // Build a navigations bar using the $classifications array
     function buildNavList() {
         $classifications = getClassifications();
@@ -64,5 +71,21 @@
                 $dv .= "<span class='veh-stock'>$vehicle[invStock] in stock</span></p>";
             $dv .= "<p class='veh-desc'>$vehicle[invDescription]</p></div></div>";
         return $dv;
+    }
+
+    function buildReviewForm($invId, $client)  {
+        $clientId = $client['clientId'];
+        $screenName = substr($client['clientFirstname'], 0, 1) . $client['clientLastname'];
+        $form = "<form method='post' action='/phpmotors/reviews/' class='review-form'";
+        $form .= "<label>Screen name <br>";
+        $form .= "<input name='screenname' type='text' readonly value=$screenName></label><br>";
+        $form .= "<label>Review <br>";
+        $form .= "<textarea name='reviewText' placeholder='Write your review here' required></textarea></label><br>";
+        $form .= "<input type='submit' class='btn' value='Submit'>";
+        $form .= "<input type='hidden' name='action' value='addReview'>";
+        $form .= "<input type='hidden' name='invId' value=$invId>";
+        $form .= "<input type='hidden' name='clientId' value=$clientId>";
+        $form .= "</form>";
+        return $form;
     }
 ?>

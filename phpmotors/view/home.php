@@ -28,7 +28,7 @@
                 <button class='btn own-today'>Own Today</button>
             </section>
             <div class='below-the-fold'>
-                <section class='reviews'>
+                <section class='homepage-reviews'>
                     <h2>DMC Delorean Reviews</h2>
                     <ul>
                         <li>"So fast it's almost like traveling in time." (4/5)</li>

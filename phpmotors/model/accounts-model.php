@@ -97,3 +97,5 @@ function updateClientPw($clientId, $hashedPassword) {
     $stmt->closeCursor();
     return $rowsChanged;
 }
+
+?>
