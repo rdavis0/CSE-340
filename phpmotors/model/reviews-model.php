@@ -39,12 +39,13 @@ function getReviewsByInvId($invId) {
 // Get reviews by client id
 function getReviewsByClientId($clientId) {
     $db = phpmotorsConnect();
-    $sql = 'SELECT r.reviewDate, r.reviewId, 
+    $sql = 'SELECT r.reviewDate, r.reviewId, r.invId,
         CONCAT(i.invMake, " ", i.invModel) AS carName
 	    FROM reviews r 
 	    INNER JOIN inventory i 
         ON r.invId = i.invId
-        WHERE clientId = :clientId';
+        WHERE clientId = :clientId
+        ORDER BY r.reviewDate DESC';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT);
     $stmt->execute();
@@ -55,7 +56,12 @@ function getReviewsByClientId($clientId) {
 
 function getReviewById($reviewId) {
     $db = phpmotorsConnect();
-    $sql = 'SELECT * FROM reviews WHERE reviewId = :reviewId';
+    $sql = 'SELECT r.reviewDate, r.reviewText,  
+        CONCAT(i.invMake, " ", i.invModel) AS carName
+        FROM reviews r 
+        INNER JOIN inventory i 
+        ON r.invId = i.invId
+        WHERE reviewId = :reviewId;';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':reviewId', $reviewId, PDO::PARAM_INT);
     $stmt->execute();
@@ -64,12 +70,13 @@ function getReviewById($reviewId) {
     return $review;
 }
 
-function updateReview($reviewId) {
+function updateReview($reviewId, $reviewText) {
     $db = phpmotorsConnect();
     $sql = 'UPDATE reviews SET reviewText = :reviewText
         WHERE reviewId = :reviewId';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':reviewId', $reviewId, PDO::PARAM_INT);
+    $stmt->bindValue(':reviewText', $reviewText, PDO::PARAM_STR);
     $stmt->execute();
     $rowsChanged = $stmt->rowCount();
     $stmt->closeCursor();

@@ -44,6 +44,12 @@ label {
   font-weight: bold;
 }
 
+.msg-info {
+  color: #2d6596;
+  font-weight: bold;
+  font-style: italic;
+}
+
 .site-header {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -184,6 +190,7 @@ button,
   background-color: #2d6596;
   font: bold 1.2em Arial, sans-serif;
   padding: 0.2em 0.5em;
+  cursor: pointer;
 }
 
 .homepage-reviews li {

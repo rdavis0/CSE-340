@@ -49,6 +49,12 @@ label {
     font-weight: bold;
 }
 
+.msg-info {
+    color: $blue;
+    font-weight: bold;
+    font-style: italic;
+}
+
 .site-header {
     display: flex;
     justify-content: space-between;
@@ -152,7 +158,8 @@ button,
 .btn {
     background-color: $blue;
     font: bold 1.2em Arial, sans-serif;
-    padding: 0.2em 0.5em
+    padding: 0.2em 0.5em;
+    cursor: pointer;
 }
 
 .homepage-reviews {

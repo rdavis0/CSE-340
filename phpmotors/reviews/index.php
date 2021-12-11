@@ -38,7 +38,7 @@ switch ($action) {
         $result = saveReview($clientId, $invId, $reviewText);
 
         if ($result === 1) {
-            $_SESSION['reviewsMessage'] = "<p>Thank you for your review. You may view it below.</p>";
+            $_SESSION['reviewsMessage'] = "<p class='msg-info'>Thank you for your review. You may view it below.</p>";
             header("Location: /phpmotors/vehicles/?action=vehicleDetailView&invId=$invId");
             exit;
         } else {
@@ -48,12 +48,58 @@ switch ($action) {
         }
         break;
     case 'editReviewView':
+        $reviewId = filter_input(INPUT_GET, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+        $review = getReviewById($reviewId);
+        $carName = $review['carName'];
+        $reviewDate = formatDate($review['reviewDate']);
+        $reviewText = $review['reviewText'];
+        include '../view/review-edit.php';
         break;
     case 'updateReview':
+        $reviewId = filter_input(INPUT_POST, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+        $reviewText = trim(filter_input(INPUT_POST, 'reviewText', FILTER_SANITIZE_STRING));
+
+        // Error handling
+        if (empty($reviewText)) {
+            $message = '<p class="error">Please add some review text.</p>';
+            header("Location: /phpmotors/reviews/?action=editReviewView&reviewId=$reviewId");
+            exit;
+        }
+
+        // Update review and check result of operation
+        $result = updateReview($reviewId, $reviewText);
+        if ($result === 1) {
+            $_SESSION['message'] = "<p class='msg-info'>Your review was updated.</p>";
+            header("Location: /phpmotors/accounts");
+            exit;
+        } else {
+            $_SESSION['message'] = "<p class='error'>Whoops! Couldn't update the review. Please try again.</p>";
+            header("Location: /phpmotors/accounts");
+            exit;
+        }
         break;
     case 'deleteReviewView':
+        $reviewId = filter_input(INPUT_GET, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+        $review = getReviewById($reviewId);
+        $carName = $review['carName'];
+        $reviewDate = formatDate($review['reviewDate']);
+        $reviewText = $review['reviewText'];
+        include '../view/review-delete.php';
         break;
     case 'deleteReview':
+        $reviewId = filter_input(INPUT_POST, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+
+        // Delete review and check result of operation
+        $result = deleteReview($reviewId);
+        if ($result === 1) {
+            $_SESSION['message'] = "<p class='msg-info'>Your review was deleted.</p>";
+            header("Location: /phpmotors/accounts");
+            exit;
+        } else {
+            $_SESSION['message'] = "<p class='error'>Whoops! Couldn't delete the review. Please try again.</p>";
+            header("Location: /phpmotors/accounts");
+            exit;
+        }
         break;
     default:
         header('Location: /phpmotors/accounts');

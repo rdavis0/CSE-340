@@ -76,7 +76,7 @@
     function buildReviewForm($invId, $client)  {
         $clientId = $client['clientId'];
         $screenName = substr($client['clientFirstname'], 0, 1) . $client['clientLastname'];
-        $form = "<form method='post' action='/phpmotors/reviews/' class='review-form'";
+        $form = "<form method='post' action='/phpmotors/reviews/' class='review-form'>";
         $form .= "<label>Screen name <br>";
         $form .= "<input name='screenname' type='text' readonly value=$screenName></label><br>";
         $form .= "<label>Review <br>";
@@ -92,7 +92,8 @@
     function buildReviewsDisplay($reviews) {
         $dv = "<div class='reviews-display'>";
         foreach ($reviews as $review) {
-            $dv .= "<p class='review-metadata'><span class='screenName'>$review[screenName]</span> wrote on $review[reviewDate]</p>";
+            $dv .= "<p class='review-metadata'><span class='screenName'>$review[screenName]</span> wrote on ";
+            $dv .= formatDate($review['reviewDate']) . "</p>";
             $dv .= "<p class='review-text'>$review[reviewText]</p>";
         }
         $dv .= "</div>";
@@ -103,13 +104,20 @@
         $dv = "<div class='client-reviews-container'>";
         $dv .= "<ul>";
         foreach ($clientReviews as $r) {
+            $invId = $r['invId'];
             $dv .= "<li class='client-review'>";
-            $dv .= $r['carName'] . " " . ($r['reviewDate']) . ":";
-            $dv .= "<a href='/reviews?action=editReviewView&reviewId=$r[reviewId]'>Edit</a> | "; //do I need index.php here?
-            $dv .= "<a href='/reviews?action=deleteReviewView&reviewId=$r[reviewId]'>Delete</a>"; 
+            $dv .= "<span class='car-name'><a href='../vehicles?action=vehicleDetailView&invId=$invId'>";
+            $dv .= $r['carName'] . "</a></span> ";
+            $dv .= "<span class='review-date'>" . (formatDate($r['reviewDate'])) . "</span>:";
+            $dv .= "<a href='/phpmotors/reviews?action=editReviewView&reviewId=$r[reviewId]'>Edit</a> | "; 
+            $dv .= "<a href='/phpmotors/reviews?action=deleteReviewView&reviewId=$r[reviewId]'>Delete</a>"; 
             $dv .= "</li>";
         }
         $dv .= "</ul></div>";
         return $dv;
+    }
+
+    function formatDate($date) {
+        return date('j F, Y', strtotime($date));
     }
 ?>
