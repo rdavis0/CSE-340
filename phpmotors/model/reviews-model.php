@@ -39,11 +39,16 @@ function getReviewsByInvId($invId) {
 // Get reviews by client id
 function getReviewsByClientId($clientId) {
     $db = phpmotorsConnect();
-    $sql = 'SELECT * FROM reviews WHERE clientId = :clientId';
+    $sql = 'SELECT r.reviewDate, r.reviewId, 
+        CONCAT(i.invMake, " ", i.invModel) AS carName
+	    FROM reviews r 
+	    INNER JOIN inventory i 
+        ON r.invId = i.invId
+        WHERE clientId = :clientId';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT);
     $stmt->execute();
-    $reviews = $stmt->fetch(PDO::FETCH_ASSOC);
+    $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     return $reviews;
 }

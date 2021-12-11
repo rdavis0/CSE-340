@@ -40,6 +40,10 @@
                     <p>Click below to manage vehicle inventory</p>
                     <p><a href='/phpmotors/vehicles'>Vehicle Management</a></p>";
                 }
+                if(isset($clientReviewsDisplay)) {
+                    echo "<h2>Your Reviews</h2>";
+                    echo $clientReviewsDisplay;
+                } 
             ?>
         </main>
         <?php require_once $_SERVER['DOCUMENT_ROOT'].'/phpmotors/common/footer.php'; ?>

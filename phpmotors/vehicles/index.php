@@ -205,7 +205,7 @@ switch ($action) {
             if(isLoggedIn()) {
                 $reviewForm = buildReviewForm($invId, $_SESSION['clientData']);
             } else { // show login link
-                $reviewsMessage = "<p>Please <a href='/phpmotors/accounts/index.php?action=login'>sign in</a> to leave a review.</p>";    
+                $_SESSION['reviewsMessage'] = "<p>Please <a href='/phpmotors/accounts/index.php?action=login'>sign in</a> to leave a review.</p>";    
             }
 
             $reviews = getReviewsByInvId($invId);

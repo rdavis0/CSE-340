@@ -58,7 +58,7 @@
         }
         $dv .= '</ul>';
         return $dv;
-       }
+    }
 
     function buildVehicleDetailsDisplay($vehicle){
         $formattedPrice = "$" . number_format($vehicle['invPrice'], 2);
@@ -96,6 +96,20 @@
             $dv .= "<p class='review-text'>$review[reviewText]</p>";
         }
         $dv .= "</div>";
+        return $dv;
+    }
+
+    function buildClientReviewsDisplay($clientReviews) {
+        $dv = "<div class='client-reviews-container'>";
+        $dv .= "<ul>";
+        foreach ($clientReviews as $r) {
+            $dv .= "<li class='client-review'>";
+            $dv .= $r['carName'] . " " . ($r['reviewDate']) . ":";
+            $dv .= "<a href='/reviews?action=editReviewView&reviewId=$r[reviewId]'>Edit</a> | "; //do I need index.php here?
+            $dv .= "<a href='/reviews?action=deleteReviewView&reviewId=$r[reviewId]'>Delete</a>"; 
+            $dv .= "</li>";
+        }
+        $dv .= "</ul></div>";
         return $dv;
     }
 ?>

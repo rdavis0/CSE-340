@@ -11,10 +11,9 @@ require_once '../library/connections.php';
 require_once '../model/main-model.php';
 require_once '../model/accounts-model.php';
 require_once '../library/functions.php';
+require_once '../model/reviews-model.php';
 
 $classifications = getClassifications();
-// var_dump($classifications);
-//     exit;
 
 // Build navigation bar
 $navList = buildNavList();
@@ -108,7 +107,7 @@ switch ($action) {
         // Store the array into the session
         $_SESSION['clientData'] = $clientData;
         // Send them to the admin view
-        include '../view/admin.php';
+        header('Location: /phpmotors/accounts');
         exit;
     case 'logout':
         unset($_SESSION['loggedin']);
@@ -188,6 +187,14 @@ switch ($action) {
         }
         exit;
     default:
+        // Get reviews
+        if ($_SESSION['loggedin']) {
+            $clientId = $_SESSION['clientData']['clientId'];
+            $clientReviews = getReviewsByClientId($clientId);
+            if(isset($clientReviews)) {
+                $clientReviewsDisplay = buildClientReviewsDisplay($clientReviews);
+            }
+        }
         include '../view/admin.php';
         break;
 }
