@@ -18,7 +18,7 @@
 <body>
     <div class='main-container'>
         <?php require_once $_SERVER['DOCUMENT_ROOT'].'/phpmotors/common/header.php'; ?>
-        <main>
+        <main class='admin-page'>
             <?php if(isset($_SESSION['message'])) {
                     echo $_SESSION['message'];
             }?>
@@ -41,7 +41,7 @@
                     <p><a href='/phpmotors/vehicles'>Vehicle Management</a></p>";
                 }
                 if(isset($clientReviewsDisplay)) {
-                    echo "<h2>Your Reviews</h2>";
+                    echo "<h2 class='reviews-header'>Your Reviews</h2>";
                     echo $clientReviewsDisplay;
                 } 
             ?>

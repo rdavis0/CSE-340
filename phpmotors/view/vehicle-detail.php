@@ -23,6 +23,7 @@
                     if(isset($_SESSION['reviewsMessage'])) echo $_SESSION['reviewsMessage'];
                     if(isset($reviewForm)) echo $reviewForm;
                     if(isset($reviewsDisplay)) echo $reviewsDisplay;
+                    else echo "<p class='first-review-prompt'>Be the first to write a review.</p>";
                 ?>
 
             </section>

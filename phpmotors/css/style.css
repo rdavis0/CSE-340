@@ -1,8 +1,6 @@
 @font-face {
   font-family: 'Share Tech Mono';
   src: url("../fonts/Share_Tech_Mono/sharetechmono-regular-webfont.woff2") format("woff2"), url("../fonts/Share_Tech_Mono/sharetechmono-regular-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
 }
 
 html {
@@ -17,8 +15,14 @@ html {
           box-sizing: inherit;
 }
 
+body, select, input {
+  font-family: 'Share Tech Mono', monospace, monospace;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 16px;
+}
+
 body {
-  font: 16px 'Share Tech Mono', monospace;
   background-image: url("/phpmotors/images/site/small_check.jpg");
   margin: 0;
 }
@@ -37,6 +41,10 @@ h2 {
 
 label {
   font-weight: bold;
+}
+
+a, a:visited {
+  color: #0000ee;
 }
 
 .error {
@@ -245,12 +253,6 @@ form.register-form #pw, form.sign-in-form #pw, form.account-update-form #pw {
   margin-bottom: 0;
 }
 
-select {
-  font-family: 'Share Tech Mono';
-  font-weight: normal;
-  font-style: normal;
-}
-
 .pw-req {
   margin-top: 0;
 }
@@ -304,6 +306,131 @@ select {
   font-size: 1.2rem;
   line-height: 1.5rem;
   margin-top: 0.5rem;
+}
+
+.admin-page h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.admin-page h2 + * {
+  margin-top: 0;
+}
+
+.reviews-section {
+  margin-top: 2rem;
+}
+
+.reviews-section .review-form {
+  margin-top: -0.5rem;
+  padding: 0.5rem;
+  background-color: #ffffb2;
+}
+
+.reviews-section .review-form h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.reviews-section .review-form textarea {
+  width: 100%;
+  height: 10rem;
+  font-size: 1rem;
+}
+
+.reviews-section .reviews-display {
+  margin-top: 1.5rem;
+}
+
+.reviews-section .reviews-display ul {
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
+}
+
+.reviews-section .reviews-display li:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.reviews-section .reviews-display li {
+  padding: 0.5rem;
+}
+
+.reviews-section .reviews-display .review-metadata {
+  margin: 0;
+}
+
+.reviews-section .reviews-display .screenName {
+  color: rebeccapurple;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.reviews-section .reviews-display .review-text {
+  margin: 0.5rem 1rem;
+}
+
+.reviews-section .first-review-prompt {
+  font-style: italic;
+}
+
+h2.reviews-header {
+  margin-bottom: 0;
+}
+
+.client-reviews-container ul {
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
+}
+
+.client-reviews-container li:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.client-reviews-container .client-review {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0.5rem 0.5rem;
+}
+
+.review-edit-form .review-text-edit,
+.review-delete-form .review-text-edit {
+  width: 99%;
+  height: 10rem;
+  font-size: 1rem;
+}
+
+.review-edit-form .review-delete-text,
+.review-delete-form .review-delete-text {
+  margin: 0.2rem 0 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #ffffb2;
+}
+
+.review-edit-form .buttons,
+.review-delete-form .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 @media only screen and (min-width: 1000px) {
@@ -397,6 +524,23 @@ select {
   }
   .veh-details > .veh-specs {
     margin-top: 0;
+  }
+  .client-reviews-container .client-review {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .review-edit-form .buttons,
+  .review-delete-form .buttons {
+    display: initial;
+  }
+  .review-edit-form .buttons .btn,
+  .review-delete-form .buttons .btn {
+    margin-right: 20px;
   }
 }
 /*# sourceMappingURL=style.css.map */

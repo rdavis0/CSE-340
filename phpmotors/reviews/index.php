@@ -61,7 +61,7 @@ switch ($action) {
 
         // Error handling
         if (empty($reviewText)) {
-            $message = '<p class="error">Please add some review text.</p>';
+            $_SESSION['message'] = '<p class="error">Please add some review text.</p>';
             header("Location: /phpmotors/reviews/?action=editReviewView&reviewId=$reviewId");
             exit;
         }

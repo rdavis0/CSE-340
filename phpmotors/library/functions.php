@@ -76,27 +76,30 @@
     function buildReviewForm($invId, $client)  {
         $clientId = $client['clientId'];
         $screenName = substr($client['clientFirstname'], 0, 1) . $client['clientLastname'];
-        $form = "<form method='post' action='/phpmotors/reviews/' class='review-form'>";
-        $form .= "<label>Screen name <br>";
-        $form .= "<input name='screenname' type='text' readonly value=$screenName></label><br>";
-        $form .= "<label>Review <br>";
-        $form .= "<textarea name='reviewText' placeholder='Write your review here' required></textarea></label><br>";
-        $form .= "<input type='submit' class='btn' value='Submit'>";
-        $form .= "<input type='hidden' name='action' value='addReview'>";
-        $form .= "<input type='hidden' name='invId' value=$invId>";
-        $form .= "<input type='hidden' name='clientId' value=$clientId>";
-        $form .= "</form>";
-        return $form;
+        $dv = "<form method='post' action='/phpmotors/reviews/' class='review-form'>";
+        $dv .= "<h3>Leave a review</h3>";
+        $dv .= "<label>Screen name <br>";
+        $dv .= "<input name='screenname' type='text' readonly value=$screenName></label><br>";
+        $dv .= "<label>Review <br>";
+        $dv .= "<textarea name='reviewText' placeholder='Write your review here' required></textarea></label><br>";
+        $dv .= "<input type='submit' class='btn' value='Submit'>";
+        $dv .= "<input type='hidden' name='action' value='addReview'>";
+        $dv .= "<input type='hidden' name='invId' value=$invId>";
+        $dv .= "<input type='hidden' name='clientId' value=$clientId>";
+        $dv .= "</form>";
+        return $dv;
     }
 
     function buildReviewsDisplay($reviews) {
-        $dv = "<div class='reviews-display'>";
+        $dv = "<div class='reviews-display'><ul>";
         foreach ($reviews as $review) {
+            $dv .= "<li class='client-review'>";
             $dv .= "<p class='review-metadata'><span class='screenName'>$review[screenName]</span> wrote on ";
             $dv .= formatDate($review['reviewDate']) . "</p>";
             $dv .= "<p class='review-text'>$review[reviewText]</p>";
+            $dv .= "</li>";
         }
-        $dv .= "</div>";
+        $dv .= "</ul></div>";
         return $dv;
     }
 
@@ -106,12 +109,12 @@
         foreach ($clientReviews as $r) {
             $invId = $r['invId'];
             $dv .= "<li class='client-review'>";
-            $dv .= "<span class='car-name'><a href='../vehicles?action=vehicleDetailView&invId=$invId'>";
-            $dv .= $r['carName'] . "</a></span> ";
-            $dv .= "<span class='review-date'>" . (formatDate($r['reviewDate'])) . "</span>:";
+            $dv .= "<span><a href='../vehicles?action=vehicleDetailView&invId=$invId'>" . $r['carName'] . "</a>";
+            $dv .= "<br>" . (formatDate($r['reviewDate'])) . "</span>";
+            $dv .= "<span class='review-manage-buttons'>";
             $dv .= "<a href='/phpmotors/reviews?action=editReviewView&reviewId=$r[reviewId]'>Edit</a> | "; 
             $dv .= "<a href='/phpmotors/reviews?action=deleteReviewView&reviewId=$r[reviewId]'>Delete</a>"; 
-            $dv .= "</li>";
+            $dv .= "</span></li>";
         }
         $dv .= "</ul></div>";
         return $dv;

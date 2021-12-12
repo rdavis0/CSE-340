@@ -1,10 +1,16 @@
 @font-face {
     font-family: 'Share Tech Mono';
     src: url('../fonts/Share_Tech_Mono/sharetechmono-regular-webfont.woff2') format('woff2'), url('../fonts/Share_Tech_Mono/sharetechmono-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
 }
 
+@mixin font-defaults {
+    font-family: 'Share Tech Mono', monospace, monospace;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 16px;
+}
+
+$lighter-gray: #dddddd;
 $light-gray: #bababa;
 $gray: #8d8d8d;
 $dark-gray: #3a3a3a;
@@ -22,8 +28,12 @@ html {
     box-sizing: inherit;
 }
 
+// Set default font for various elements
+body, select, input {
+    @include font-defaults;
+}
+
 body {
-    font: 16px 'Share Tech Mono', monospace;
     background-image: url('/phpmotors/images/site/small_check.jpg');
     margin: 0;
 }
@@ -42,6 +52,10 @@ h2 {
 
 label {
     font-weight: bold;
+}
+
+a, a:visited {
+    color: rgb(0, 0, 238);
 }
 
 .error {
@@ -209,13 +223,6 @@ form {
     }
 }
 
-select {
-    //TODO: reset select (and all html) default styles instead of defining the font again here
-    font-family: 'Share Tech Mono';
-    font-weight: normal;
-    font-style: normal;
-}
-
 .pw-req {
     margin-top: 0;
 }
@@ -259,6 +266,106 @@ select {
         margin-top: 0.5rem;
     }
 }
+
+.admin-page {
+    h2 {
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+        +* {
+        margin-top: 0;
+
+        }
+    }
+}
+
+// Reviews 
+.reviews-section {
+    margin-top: 2rem;
+    .review-form {
+        margin-top: -0.5rem;
+        padding: 0.5rem;
+        background-color: rgb(255, 255, 178);
+        h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        textarea {
+            width: 100%;
+            height: 10rem;
+            font-size: 1rem;
+        }
+    }
+    .reviews-display {
+        margin-top: 1.5rem;
+        ul {
+            margin: 0;
+            list-style-type: none;
+            padding: 0;
+        }
+        li:nth-child(even) { //alternate background colors
+            background-color: $lighter-gray;
+        }
+        li {
+            padding: 0.5rem;
+        }
+        .review-metadata {
+            margin: 0;
+        }
+        .screenName {
+            color: rebeccapurple;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .review-text {
+            margin: 0.5rem 1rem;
+        }
+    } 
+    .first-review-prompt {
+        font-style: italic;
+    }   
+}
+
+h2.reviews-header {
+    margin-bottom: 0;
+}
+
+.client-reviews-container {
+    ul {
+        margin: 0;
+        list-style-type: none;
+        padding: 0;
+    }
+    li:nth-child(even) { //alternate background colors
+        background-color: $lighter-gray;
+    }
+    .client-review {
+        flex-flow: column;
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        padding: 0.5rem 0.5rem;
+    }
+}
+
+.review-edit-form,
+.review-delete-form {
+    .review-text-edit {
+        width: 99%;
+        height: 10rem;
+        font-size: 1rem;
+    }
+    .review-delete-text {
+        margin: 0.2rem 0 1rem;
+        padding: 0.5rem 1rem;
+        background-color: rgb(255, 255, 178);
+    }
+    .buttons {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+    }
+}
+
 
 // Desktop media query styles
 @media only screen and (min-width: 1000px) {
@@ -331,6 +438,19 @@ select {
         }
         >.veh-specs {
             margin-top: 0;
+        }
+    }
+    .client-reviews-container {
+        .client-review {
+            flex-flow: row wrap;
+            align-items: center;
+        }
+    }
+    .review-edit-form,
+    .review-delete-form {
+        .buttons {
+            display: initial;
+            .btn { margin-right: 20px; }
         }
     }
 }

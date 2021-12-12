@@ -18,11 +18,13 @@
             }?>
             <p class='error'>Deleting a review is permanent. Are you sure you want to delete this review?</p>
             <form method='post' action='/phpmotors/reviews/' class='review-delete-form'>
-                <label for='reviewText'>Your review</label><br>
-                <span><?php echo $reviewDate; ?></span><br>
-                <p name='reviewText' class='review-delete-text'><?php echo $reviewText; ?></p>
-                <input type='submit' class='btn' value='Delete'>
-                <a class='cancel-link' href='../accounts/'>Cancel</a>
+                <label>Your review - 
+                <?php echo $reviewDate; ?></label>
+                <p class='review-delete-text'><?php echo $reviewText; ?></p>
+                <div class='buttons'>
+                    <input type='submit' class='btn' value='Delete'>
+                    <a class='cancel-link' href='../accounts/'>Cancel</a>
+                </div>
                 <input type='hidden' name='action' value='deleteReview'>
                 <input type='hidden' name='reviewId' value=<?php echo $reviewId ?>>
             </form>
@@ -31,3 +33,4 @@
     </div>
 </body>
 </html>
+<?php unset($_SESSION['message'])?>
